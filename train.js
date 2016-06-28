@@ -11,15 +11,12 @@
 
   // Live Time of The Day 
 
-  var now = null; 
-
   var updateTime = function(){
-  	now = moment().format('hh:mm:ss');
+  	var now = moment().format('hh:mm');
   	$('#currentTime').html(now);
   }
 
   $(document).ready(function(){
-    time = $('#currentTime')
     updateTime();
     setInterval(updateTime, 1000);
 });
@@ -57,46 +54,17 @@ $('#submit').on('click', function(){
 });
 
 
-database.ref().on('child_added', function(childSnapshot) {
+database.ref().on('child_added', function(childSnapshot, prevChildKey) {
 
-	console.log(childSnapshot.val());
+	var trainName = childSnapshot.val().trainName;
+	var destination = childSnapshot.val().destination;
+	var firstTrain = childSnapshot.val().firstTrain;
+	var frequency = childSnapshot.val().frequency;
+
+
+	$('.table > tbody').append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>"
+		+ frequency + "</td><td>" + "Delayed" + "</td><td>" + "Unknown" + "</td></tr>");
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
