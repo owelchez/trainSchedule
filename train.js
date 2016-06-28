@@ -9,6 +9,22 @@
 
   var database = firebase.database();
 
+  // Live Time of The Day 
+
+  var now = null; 
+
+  var updateTime = function(){
+  	now = moment().format('hh:mm:ss');
+  	$('#currentTime').html(now);
+  }
+
+  $(document).ready(function(){
+    time = $('#currentTime')
+    updateTime();
+    setInterval(updateTime, 1000);
+});
+
+  /*******************************************/
 
 $('#submit').on('click', function(){
 
@@ -43,7 +59,7 @@ $('#submit').on('click', function(){
 
 database.ref().on('child_added', function(childSnapshot) {
 
-	
+	console.log(childSnapshot.val());
 
 });
 
