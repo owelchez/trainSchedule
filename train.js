@@ -7,12 +7,73 @@
   };
   firebase.initializeApp(config);
 
-
-$('.currentTime').append(moment().format('HH:mm'));
-
+  var database = firebase.database();
 
 
-console.log('You will make it work!');
+$('#submit').on('click', function(){
+
+	// Retrieve user inputs from form
+	var trainName = $('#trainName').val().trim();
+	var destination = $('#destination').val().trim();
+	var firstTrain = $('#firstTrain').val().trim();
+	var frequency = $('#frequency').val().trim();
+
+	// Create an object for new train to be added
+	var newTrain = {
+		trainName: trainName,
+		destination: destination,
+		firstTrain: firstTrain,
+		frequency: frequency
+	}
+
+	
+	database.ref().push(newTrain);
+
+	$('#trainName').val('');
+	$('#destination').val('');
+	$('#firstTrain').val('');
+	$('#frequency').val('');
+
+
+
+	return false;
+
+});
+
+
+database.ref().on('child_added', function(childSnapshot) {
+
+	
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
